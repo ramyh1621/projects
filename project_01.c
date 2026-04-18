@@ -24,17 +24,16 @@ void input(tpatien t[100],int n){
         printf("The patien number %d :\n",i+1);
         printf("Enter the name of the patien : ");
         scanf("%s",t[i].name);
-     //   printf("Enter the ID :");
-     //   scanf("%d",&t[i].id);
-       // printf("Enter the phone number :");
-     //   scanf("%s",t[i].tel);
-       // printf("Enter date of birth dd mm yyyy :");
-     //   scanf("%d %d %d",&t[i].birth_date.day,&t[i].birth_date.month,&t[i].birth_date.year);
+        printf("Enter the ID :");
+        scanf("%d",&t[i].id);
+        printf("Enter the phone number :");
+        scanf("%s",t[i].tel);
+        printf("Enter date of birth dd mm yyyy :");
+        scanf("%d %d %d",&t[i].birth_date.day,&t[i].birth_date.month,&t[i].birth_date.year);
         printf("Enter the appointment date dd mm yyyy :");
-        scanf("%d",&t[i].rnv_date.year);
-      //  scanf("%d %d %d",&t[i].rnv_date.day,&t[i].rnv_date.month,&t[i].rnv_date.year);
-      //  printf("Enter the appointment time hh mm :");
-      //  scanf("%d %d",&t[i].rnv_time.h,&t[i].rnv_time.m);
+        scanf("%d %d %d",&t[i].rnv_date.day,&t[i].rnv_date.month,&t[i].rnv_date.year);
+        printf("Enter the appointment time hh mm :");
+        scanf("%d %d",&t[i].rnv_time.h,&t[i].rnv_time.m);
     }
 }
 void display(tpatien arr[],int n){
@@ -45,42 +44,38 @@ void display(tpatien arr[],int n){
     }
 }
 void sort(tpatien a[],int n){
-     int ar[100];
-     int i,j;
-     int temp;
+     int i,j,d;
+     tpatien temp;
      printf("the sort by the date of rnv :\n");
-     for ( i=0;i<n-1;i++){
-        
-       // int y=a[i].rnv_date.year;
-        for ( j=0;j<n-i-1;j++){
-            if( a[i].rnv_date.year<a[j+1].rnv_date.year){
-               temp=a[i].rnv_date.year;
-               a[i].rnv_date.year=a[i+1].rnv_date.year;
-               a[i+1].rnv_date.year=temp;}
-               printf("%s",a[i].name);
-               // a[i].rnv_date.year=ar[i];
-              //  a[i].rnv_date.year=a[i-1].rnv_date.year;
-              //  a[i-1].rnv_date.year=ar[i];
-              //  printf("%s\n",a[i].name);
-            
-             
-            
-                // printf("%s\n",a[i].name);
-                 // a[i].rnv_date.year=0;
-                  
-           // else{
-                                     
-            
-                //ar[i]=a[j].rnv_date.year;
-             //  printf("%s\n",a[i+1].name);
-             //  a[i+1].rnv_date.year=0;;
+       
+     for ( i=0;i<n;i++)
+        {
+         d=i;
+        for ( j=i+1;j<n;j++){
+             if( a[j].rnv_date.year<a[d].rnv_date.year){
+                 d=j;
+                 }
+                else if(a[j].rnv_date.year == a[d].rnv_date.year){
+                      if(a[j].rnv_date.month < a[d].rnv_date.month){
+                      d=j;}
+                else if (a[j].rnv_date.month == a[d].rnv_date.month){
+                    if (a[j].rnv_date.day < a[d].rnv_date.day){
+                        d=j;
+                    }
+                }
 
-            }
-          
+                }}
+            temp = a[d];
+            a[d] = a[i];
+            a[i] = temp;  
+        for(i=0;i<n;i++){
+                 printf("in %d/%d/%d there is :%s\n",a[i].rnv_date.day,a[i].rnv_date.month,a[i].rnv_date.year,a[i].name);
+                 
         }
-          for(i=0;i<n;i++){
-           printf("%s\n",a[i].name);
-    }}
+                           
+          
+}}
+    
 int main(){
     int n;
     tpatien t[100];
