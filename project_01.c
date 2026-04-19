@@ -58,7 +58,7 @@ void sort(tpatien a[],int n){
                 else if(a[j].rnv_date.year == a[d].rnv_date.year){
                       if(a[j].rnv_date.month < a[d].rnv_date.month){
                       d=j;}
-                else if (a[j].rnv_date.month == a[d].rnv_date.month){
+                else if(a[j].rnv_date.month == a[d].rnv_date.month){
                     if (a[j].rnv_date.day < a[d].rnv_date.day){
                         d=j;
                     }
@@ -75,10 +75,27 @@ void sort(tpatien a[],int n){
                            
           
 }}
+void add(tpatien v[],int *n){
+      
+          
+        printf("Enter name of a new patien : ");
+        scanf("%s",v[*n].name);
+        printf("Enter the ID :");
+        scanf("%d",&v[*n].id);
+        printf("Enter the phone number :");
+        scanf("%s",v[*n].tel);
+        printf("Enter date of birth dd mm yyyy :");
+        scanf("%d %d %d",&v[*n].birth_date.day,&v[*n].birth_date.month,&v[*n].birth_date.year);
+        printf("Enter the appointment date dd mm yyyy :");
+        scanf("%d %d %d",&v[*n].rnv_date.day,&v[*n].rnv_date.month,&v[*n].rnv_date.year);
+        printf("Enter the appointment time hh mm :");
+        scanf("%d %d",&v[*n].rnv_time.h,&v[*n].rnv_time.m);
+        
+}
     
 int main(){
     int n;
-    tpatien t[100];
+    tpatien t[150];
     do{
         printf("Enter N number of patiens <100 : ");
         scanf("%d",&n);
@@ -86,5 +103,7 @@ int main(){
     input(t,n);
     display(t,n);
     sort(t,n);
+    add(t,&n);
+     display(t,n);  
 return 0;
 }
