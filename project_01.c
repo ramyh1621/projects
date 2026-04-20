@@ -62,6 +62,16 @@ void sort(tpatien a[],int n){
                     if (a[j].rnv_date.day < a[d].rnv_date.day){
                         d=j;
                     }
+                    else if (a[j].rnv_date.day == a[d].rnv_date.day){
+                        if (a[j].rnv_time.h < a[d].rnv_time.h){
+                            d=j;
+                        }
+                        else if (a[j].rnv_time.h < a[d].rnv_time.h){
+                            if (a[j].rnv_time.m < a[d].rnv_time.m){
+                                d=j;
+                            }
+                        }
+                    }
                 }
 
                 }}
@@ -69,7 +79,7 @@ void sort(tpatien a[],int n){
             a[d] = a[i];
             a[i] = temp;  
         for(i=0;i<n;i++){
-                 printf("in %d/%d/%d there is :%s\n",a[i].rnv_date.day,a[i].rnv_date.month,a[i].rnv_date.year,a[i].name);
+                 printf("in %d/%d/%d at %d h: %d min there is :%s\n",a[i].rnv_date.day,a[i].rnv_date.month,a[i].rnv_date.year,a[i].name,a[i].rnv_time.h,a[i].rnv_time.m);
                  
         }
                            
@@ -90,11 +100,25 @@ void add(tpatien v[],int *n){
         scanf("%d %d %d",&v[*n].rnv_date.day,&v[*n].rnv_date.month,&v[*n].rnv_date.year);
         printf("Enter the appointment time hh mm :");
         scanf("%d %d",&v[*n].rnv_time.h,&v[*n].rnv_time.m);
-        
+    (*n)++;
+}
+void delete(tpatien s[],int *n,int acid){
+
+    int i,j;
+    printf("Enter the id of the patien you wanna delete :");
+    scanf("%d",&acid);
+    for (i=0;i<*n;i++){
+        if (acid == s[i].id){
+            for (j=i;j<(*n)-1;i++){
+                s[j]=s[j+1];
+            }
+        }
+    }
+    (*n)--;
 }
     
 int main(){
-    int n;
+    int n,id;
     tpatien t[150];
     do{
         printf("Enter N number of patiens <100 : ");
@@ -104,6 +128,8 @@ int main(){
     display(t,n);
     sort(t,n);
     add(t,&n);
-     display(t,n);  
+    display(t,n); 
+    delete(t,&n,id);
+    display(t,n);
 return 0;
 }
