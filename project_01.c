@@ -18,6 +18,7 @@ typedef struct{
     ttime rnv_time;
     tdate vertl[];
 }tpatien;
+
 void input(tpatien t[100],int n){
     int i;
     for (i=0;i<n;i++){
@@ -46,7 +47,7 @@ void display(tpatien arr[],int n){
 void sort(tpatien a[],int n){
      int i,j,d;
      tpatien temp;
-     printf("the sort by the date of rnv :\n");
+     printf("the sort by the date of appointment :\n");
        
      for ( i=0;i<n;i++)
         {
@@ -102,34 +103,51 @@ void add(tpatien v[],int *n){
         scanf("%d %d",&v[*n].rnv_time.h,&v[*n].rnv_time.m);
     (*n)++;
 }
-void delete(tpatien s[],int *n,int acid){
+void delete(tpatien s[],int *n,int id){
 
     int i,j;
     printf("Enter the id of the patien you wanna delete :");
-    scanf("%d",&acid);
+    scanf("%d",&id);
     for (i=0;i<*n;i++){
-        if (acid == s[i].id){
+        if (id == s[i].id){
             for (j=i;j<(*n)-1;i++){
                 s[j]=s[j+1];
             }
         }
-    }
-    (*n)--;
+    (*n)--;}
+    
 }
     
 int main(){
-    int n,id;
+    int n,id,choice=1;
     tpatien t[150];
     do{
         printf("Enter N number of patiens <100 : ");
         scanf("%d",&n);
     }while(n<=0 || n>100);
-    input(t,n);
-    display(t,n);
-    sort(t,n);
-    add(t,&n);
-    display(t,n); 
-    delete(t,&n,id);
-    display(t,n);
+    do {
+    do{
+    printf("------------------------------\n");
+    printf(" 1) input \n 2) display \n 3) sort \n 4) add \n 5) delete \n tap zero to exit\n");
+    printf("Enter number of function you wanna use : \n");
+    scanf("%d",&choice);
+    }while(choice >5 || choice <0);
+    
+    if (choice ==1){
+        input(t,n);}
+        else if (choice ==2){
+            display(t,n);
+        }
+             else if (choice ==3){
+                sort(t,n);
+             }
+                   else if (choice ==4){
+                     add(t,&n);
+                   }
+                    else if (choice ==5){
+                        delete(t,&n,id);
+
+                    }
+    }while(choice != 0);
 return 0;
 }
