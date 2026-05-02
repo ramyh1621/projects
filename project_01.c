@@ -16,14 +16,12 @@ typedef struct{
     tdate birth_date;
     tdate rnv_date;
     ttime rnv_time;
-    tdate vertl[];
 }tpatien;
 
 void input(tpatien t[100],int n){
     int i;
     for (i=0;i<n;i++){
-        printf("The patien number %d :\n",i+1);
-        printf("Enter the name of the patien : ");
+        printf("Enter the name of patien %d : ",i+1);
         scanf("%s",t[i].name);
         printf("Enter the ID :");
         scanf("%d",&t[i].id);
@@ -48,7 +46,6 @@ void sort(tpatien a[],int n){
      int i,j,d;
      tpatien temp;
      printf("the sort by the date of appointment :\n");
-       
      for ( i=0;i<n;i++)
         {
          d=i;
@@ -68,24 +65,17 @@ void sort(tpatien a[],int n){
                             d=j;
                         }
                         else if (a[j].rnv_time.h < a[d].rnv_time.h){
-                            if (a[j].rnv_time.m < a[d].rnv_time.m){
-                                d=j;
-                            }
+                            if (a[j].rnv_time.m < a[d].rnv_time.m)
+                                d=j; 
                         }
                     }
                 }
-
                 }}
             temp = a[d];
             a[d] = a[i];
-            a[i] = temp;  
-        for(i=0;i<n;i++){
-                 printf("in %d/%d/%d at %d h: %d min there is :%s\n",a[i].rnv_date.day,a[i].rnv_date.month,a[i].rnv_date.year,a[i].name,a[i].rnv_time.h,a[i].rnv_time.m);
-                 
+            a[i] = temp; } 
+            display(a,n);
         }
-                           
-          
-}}
 void add(tpatien v[],int *n){
       
           
@@ -103,21 +93,65 @@ void add(tpatien v[],int *n){
         scanf("%d %d",&v[*n].rnv_time.h,&v[*n].rnv_time.m);
     (*n)++;
 }
-void delete(tpatien s[],int *n,int id){
-
-    int i,j;
+void delete(tpatien s[],int *n){
+    int id;
+    int i,j,found=0;
     printf("Enter the id of the patien you wanna delete :");
     scanf("%d",&id);
     for (i=0;i<*n;i++){
         if (id == s[i].id){
-            for (j=i;j<(*n)-1;i++){
+            for (j=i;j<(*n)-1;j++){
                 s[j]=s[j+1];
             }
-        }
-    (*n)--;}
-    
+        (*n)--;
+        found =1;
+        printf("patient deleted.\n");
+        break;
+    }
+    }
+    if (!found){
+        printf("ID not found.\n");
+    }
 }
+void search(tpatien k[],int *n){
+    int id;
+    printf("Enter ID :");
+    scanf("%d",&id);
+    for(int i=0;i<*n;i++){
+          if(k[i].id==id){
+            printf("name : %s \n id : %d\n tel :%d\n date of birth : %d/%d/%d \n",k[i].name,k[i].id,k[i].tel,k[i].birth_date.day,k[i].birth_date.month,k[i].birth_date.year);
+          }
+    }
+
+}
+void count(tpatien l[],int *n){
+    int day,month,year;
+    int m=0;
+    printf("Enter oppointment date dd/mm/yyyy:");
+    scanf("%d %d %d",&day,&month,&year);
+    for (int i=0;i<*n;i++){
+        if (year==l[i].rnv_date.year)
+          if (month==l[i].rnv_date.month)
+             if (day==l[i].rnv_date.day){
+                 m++;
+                }
+               
+              
+            }printf("there is %d opointments\n",m);
+            
+            
+}
+void archive(tpatien b[],int n){
+    FILE *fptr = fopen("patien_data.txt","w");
+    //fprintf(fptr, "id | name | phone | birth date | appointment date | appointment time\n");
     
+    for(int i=0;i<n;i++){
+        fprintf(fptr,"-------------------------------\n");
+        fprintf(fptr,"patien %d :\n",i+1);
+        fprintf(fptr,"id: %d \nname: %s \nphone %s \nbirth date: %02d /%02d /%04d \nappointment date: %02d/%02d/%04d \nappointment time: %02d : %02d\n",b[i].id,b[i].name,b[i].tel,b[i].birth_date.day,b[i].birth_date.month,b[i].birth_date.year,b[i].rnv_date.day,b[i].rnv_date.month,b[i].rnv_date.year,b[i].rnv_time.h,b[i].rnv_time.m);
+    }
+    fclose(fptr);
+}
 int main(){
     int n,id,choice=1;
     tpatien t[150];
@@ -128,26 +162,24 @@ int main(){
     do {
     do{
     printf("------------------------------\n");
-    printf(" 1) input \n 2) display \n 3) sort \n 4) add \n 5) delete \n tap zero to exit\n");
+    printf(" 1) input \n 2) display \n 3) sort \n 4) add \n 5) delete \n 6) search \n 7) count \n 8) archive\n 0) exit\n");
     printf("Enter number of function you wanna use : \n");
     scanf("%d",&choice);
-    }while(choice >5 || choice <0);
-    
-    if (choice ==1){
-        input(t,n);}
-        else if (choice ==2){
-            display(t,n);
-        }
-             else if (choice ==3){
-                sort(t,n);
-             }
-                   else if (choice ==4){
-                     add(t,&n);
-                   }
-                    else if (choice ==5){
-                        delete(t,&n,id);
-
-                    }
+    }while(choice >8 || choice <0);
+    printf("------------------------------\n");
+    switch (choice){
+        case 1: input(t,n); break;
+        case 2: display(t,n); break;
+        case 3: sort(t,n); break;
+        case 4: add(t,&n); break;
+        case 5: delete(t,&n); break;
+        case 6: search(t,&n); break;
+        case 7: count(t,&n); break;
+        case 8: archive(t,n); break;
+        case 0: break;
+        default: printf("Invalid choice.\n");
+    }
+        
     }while(choice != 0);
 return 0;
-}
+}  
