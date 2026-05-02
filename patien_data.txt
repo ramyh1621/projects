@@ -1,0 +1,32 @@
+-------------------------------
+patien 1 :
+id: 10 
+name: mohamed 
+phone 0667688907 
+birth date: 12 /05 /2007 
+appointment date: 15/05/2026 
+appointment time: 08 : 30
+-------------------------------
+patien 2 :
+id: 14 
+name: sami 
+phone 0578443912 
+birth date: 25 /07 /2002 
+appointment date: 15/05/2026 
+appointment time: 09 : 00
+-------------------------------
+patien 3 :
+id: 11 
+name: amine 
+phone 0786564412 
+birth date: 11 /02 /2005 
+appointment date: 15/05/2026 
+appointment time: 10 : 20
+-------------------------------
+patien 4 :
+id: 13 
+name: ramy 
+phone 0669965433 
+birth date: 22 /01 /2008 
+appointment date: 15/05/2026 
+appointment time: 14 : 30
