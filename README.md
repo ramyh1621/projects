@@ -20,5 +20,5 @@ Implement a menu-driven program to test all functionalities:
 5) Delete a patient.
 6) Search for a patient.
 7) Count appointments by date.
-8) Archive (save) patients in a structured text file.
+8) Archive (save) patients in a structured text file (you can find a text file in the branch to see how does this work). 
 0) Exit
