@@ -64,7 +64,7 @@ void sort(tpatien a[],int n){
                         if (a[j].rnv_time.h < a[d].rnv_time.h){
                             d=j;
                         }
-                        else if (a[j].rnv_time.h < a[d].rnv_time.h){
+                        else if (a[j].rnv_time.h == a[d].rnv_time.h){
                             if (a[j].rnv_time.m < a[d].rnv_time.m)
                                 d=j; 
                         }
@@ -151,6 +151,7 @@ void archive(tpatien b[],int n){
         fprintf(fptr,"id: %d \nname: %s \nphone %s \nbirth date: %02d /%02d /%04d \nappointment date: %02d/%02d/%04d \nappointment time: %02d : %02d\n",b[i].id,b[i].name,b[i].tel,b[i].birth_date.day,b[i].birth_date.month,b[i].birth_date.year,b[i].rnv_date.day,b[i].rnv_date.month,b[i].rnv_date.year,b[i].rnv_time.h,b[i].rnv_time.m);
     }
     fclose(fptr);
+ 
 }
 int main(){
     int n,id,choice=1;
